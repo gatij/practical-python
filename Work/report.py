@@ -46,24 +46,49 @@ def read_prices(filename):
 			try:
 				prices[row[0]] = row[1]
 			except IndexError:
-				print("Bad data in this row")
-	return prices
+				pass
+		return prices
 
 holdings_list = read_portfolio_as_list('Data/portfolio.csv')
 prices_dict = read_prices('Data/prices.csv')
-pprint(holdings_list)
-pprint(prices_dict)
+#pprint(holdings_list)
+#pprint(prices_dict)
 
+
+
+# Exercise 2.7
 P_L = 0
 holding_P_L = 0
 for holding in holdings_list:
 	holding_P_L = ((float(prices_dict[holding[0]]) - holding[2]) * holding[1])
-	print(holding[0], 'curr_price:', float(prices_dict[holding[0]]), 'Buy_price:', holding[2], holding_P_L)
+	#print(holding[0], 'curr_price:', float(prices_dict[holding[0]]), 'Buy_price:', holding[2], holding_P_L)
 	P_L += holding_P_L
 
-print("NetP/L:", P_L)
+print("NetP/L:", P_L, '\n')
 
-	
+
+
+# Exercise 2.9 - 2.12
+headers = ('Name', 'Shares', 'Price', 'Change')
+print(f'{headers[0]:>10s} {headers[1]:>10s} {headers[2]:>10s} {headers[3]:>10s}')
+print(f"{'-'*10:>10s} {'-'*10:>10s} {'-'*10:>10s} {'-'*10:>10s}")
+
+
+
+def make_report(holdings_list,prices_dict):
+	report = []
+	for holding in holdings_list:
+		report.append((holding[0], holding[1], float(prices_dict[holding[0]]), (float(prices_dict[holding[0]]) - holding[2])))
+	return report
+
+report = make_report(holdings_list,prices_dict)
+for name, shares, price, change in report:
+        print(f'{name:>10s} {shares:>10d} {"$"+ str(round(price,2)):>10s} {change:>10.2f}')
+
+
+
+
+
 
     
     
