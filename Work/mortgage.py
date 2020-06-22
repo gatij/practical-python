@@ -23,4 +23,5 @@ while principal > 0:
 	month = month + 1
 	print(month,round(total_paid,2),round(principal,2))
     
-print('Total paid', round(total_paid,2), 'over', month,'months')
+#print('Total paid', round(total_paid,2), 'over', month,'months')
+print(f'Total paid {total_paid} over {month} months')
