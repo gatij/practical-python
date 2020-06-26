@@ -34,18 +34,22 @@ def portfolio_cost(filename):
 cost = portfolio_cost('Data/portfolio.csv')
 print('Total cost using function:', cost)
 
-# Exercise 1.32
+# Exercise 1.32, 2.16
 import csv
 def portfolio_cost_csv_lib(filename):
 	total_cost = 0
 	f = open(filename)
 	rows = csv.reader(f)
-	header = next(f)
-	for row in rows:
+	headers = next(rows)
+	#print(headers)
+	for i,row in enumerate(rows):
+		#record = {}
+		record = dict(zip(headers, row))
+		#print(record)
 		try:
-			total_cost = total_cost + (int(row[1]) * float(row[2]))
+			total_cost = total_cost + (int(record['shares']) * float(record['price']))
 		except ValueError:
-			print("Something is missing", line)
+			print("Something is missing in ", row, "with row number", i)
 
 	f.close()
 	return total_cost
@@ -54,7 +58,7 @@ cost = portfolio_cost_csv_lib('Data/portfolio.csv')
 print('Total cost using csv module:', cost)
 
 
-# Exercise 1.33
+# Exercise 1.33, 2.15
 
 import sys
 
@@ -62,12 +66,12 @@ def portfolio_cost_command_line(filename):
 	total_cost = 0
 	f = open(filename)
 	rows = csv.reader(f)
-	header = next(f)
-	for row in rows:
+	header = next(rows)
+	for i,row in enumerate(rows):
 		try:
 			total_cost = total_cost + (int(row[1]) * float(row[2]))
 		except ValueError:
-			print("Something is missing", line)
+			print("Something is missing in ", row, "with row number", i)
 
 	f.close()
 	return total_cost

@@ -36,6 +36,20 @@ def read_portfolio_as_dict(filename):
     return portfolio
 
 
+# Exercise 2.23
+# magic of comprehension 
+def read_portfolio(filename):
+	with open(filename, 'rt') as f:
+		rows = csv.reader(f)
+		headers = next(rows)
+
+		select = ['name', 'shares', 'price']
+		indices = [ headers.index(colname) for colname in select ]
+		row = next(rows)
+		portfolio = [ { col:row[index] for col,index in zip(select,indices) } for row in rows ]
+
+	return portfolio
+
 # Exercise 2.6
 
 def read_prices(filename):
