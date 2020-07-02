@@ -95,9 +95,26 @@ def make_report(holdings_list,prices_dict):
 		report.append((holding[0], holding[1], float(prices_dict[holding[0]]), (float(prices_dict[holding[0]]) - holding[2])))
 	return report
 
-report = make_report(holdings_list,prices_dict)
-for name, shares, price, change in report:
-        print(f'{name:>10s} {shares:>10d} {"$"+ str(round(price,2)):>10s} {change:>10.2f}')
+
+
+# Exercise 3.1
+def print_report(report):
+	for name, shares, price, change in report:
+		print(f'{name:>10s} {shares:>10d} {"$"+ str(round(price,2)):>10s} {change:>10.2f}')
+        
+
+
+
+def portfolio_report(portfolio_filename, prices_filename):
+	holdings_list = read_portfolio_as_list(portfolio_filename)
+	prices_dict = read_prices(prices_filename)
+	report = make_report(holdings_list,prices_dict)
+	print_report(report)
+
+portfolio_report('Data/portfolio.csv','Data/prices.csv')
+
+
+
 
 
 
